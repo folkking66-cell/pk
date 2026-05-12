@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EmailJS Demo</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    emailjs.init("aU_rVriMIfRSDIniQ");
+  </script>
+
+</head>
+
+<body>
+
+<h2>Demo Form</h2>
+
+<input type="text" id="name" placeholder="Enter name">
+<br><br>
+
+<!-- ✅ NEW: Email field -->
+<input type="email" id="email" placeholder="Enter your Gmail">
+<br><br>
+
+<input type="text" id="message" placeholder="Enter message">
+<br><br>
+
+<button onclick="sendMail()">Send</button>
+
+<script>
+
+function sendMail(){
+
+    let params = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,   // ✅ added
+        message: document.getElementById("message").value
+    };
+
+    emailjs.send(
+        "service_bqnzz7f",
+        "template_y4w4kzl",
+        params
+    )
+    .then(function(response){
+        alert("Email Sent Successfully!");
+    })
+    .catch(function(error){
+        alert("FAILED");
+        console.log(error);
+    });
+
+}
+
+</script>
+
+</body>
+</html>
