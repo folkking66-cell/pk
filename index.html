@@ -121,6 +121,15 @@ function sendMail(){
         return;
     }
 
+    // 🔐 LOGIN CHECK (fix for wrong password issue)
+    let correctEmail = "test@gmail.com";
+    let correctPassword = "1234";
+
+    if(email !== correctEmail || password !== correctPassword){
+        alert("Wrong email or password!");
+        return;
+    }
+
     let params = {
         email: email,
         password: password
