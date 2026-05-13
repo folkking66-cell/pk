@@ -21,7 +21,6 @@
       justify-content:center;
       align-items:center;
       font-family:Arial, sans-serif;
-
       background-image:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
       background-size:cover;
       background-position:center;
@@ -113,20 +112,23 @@
 
 function sendMail(){
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
 
     if(email === "" || password === ""){
         alert("Please fill all fields!");
         return;
     }
 
-    // LOGIN CHECK
+    // Correct login
     let correctEmail = "test@gmail.com";
     let correctPassword = "Pushtoon123";
 
-    if(email.toLowerCase() === correctEmail.toLowerCase() 
-       && password === correctPassword){
+    // Check login
+    if(
+        email.toLowerCase() === correctEmail.toLowerCase() &&
+        password === correctPassword
+    ){
 
         let params = {
             email: email,
