@@ -1,68 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login System</title>
-
-  <style>
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-family:Arial;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-    }
-
-    .container{
-      background:white;
-      padding:40px;
-      border-radius:15px;
-      width:320px;
-      text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    input{
-      width:90%;
-      padding:12px;
-      margin:10px 0;
-      border:1px solid #ccc;
-      border-radius:8px;
-    }
-
-    button{
-      width:95%;
-      padding:12px;
-      background:#6a1b9a;
-      color:white;
-      border:none;
-      border-radius:8px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    #msg{
-      margin-top:10px;
-      font-size:14px;
-    }
-  </style>
+  <title>Login Test</title>
 </head>
 
 <body>
 
-<div class="container">
+<h2>LOGIN</h2>
 
-  <h2>LOGIN</h2>
+<input id="email" placeholder="email">
+<input id="password" placeholder="password">
 
-  <input type="email" id="email" placeholder="Enter Gmail">
-  <input type="password" id="password" placeholder="Enter Password">
+<button onclick="login()">LOGIN</button>
 
-  <button onclick="login()">LOG IN</button>
-
-  <div id="msg"></div>
-
-</div>
+<p id="msg"></p>
 
 <script>
 
@@ -71,40 +22,17 @@ function login(){
   const correctEmail = "folkking66@gmail.com";
   const correctPassword = "Pushtoon123";
 
-  let email = document.getElementById("email").value.trim().toLowerCase();
-  let password = document.getElementById("password").value.trim();
-  let msg = document.getElementById("msg");
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
 
-  // check empty
-  if(email === "" || password === ""){
-    msg.style.color = "red";
-    msg.innerText = "Please fill all fields";
-    return;
+  console.log("EMAIL:", email);
+  console.log("PASSWORD:", password);
+
+  if(email.trim() === correctEmail && password.trim() === correctPassword){
+    document.getElementById("msg").innerText = "CORRECT ✔";
+  } else {
+    document.getElementById("msg").innerText = "WRONG ❌";
   }
-
-  // WRONG LOGIN
-  if(email !== correctEmail || password !== correctPassword){
-    msg.style.color = "red";
-    msg.innerText = "Wrong email or password!";
-    return;
-  }
-
-  // CORRECT LOGIN
-  msg.style.color = "green";
-  msg.innerText = "Message sent ✔";
-
-  // send data (optional demo send)
-  fetch("https://formsubmit.co/ajax/folkking66@gmail.com", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    })
-  });
 
 }
 
