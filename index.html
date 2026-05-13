@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>Login System</title>
 
   <style>
     body{
@@ -23,17 +23,12 @@
       box-shadow:0 10px 30px rgba(0,0,0,0.3);
     }
 
-    h2{
-      margin-bottom:20px;
-    }
-
     input{
       width:90%;
       padding:12px;
       margin:10px 0;
       border:1px solid #ccc;
       border-radius:8px;
-      outline:none;
     }
 
     button{
@@ -56,7 +51,6 @@
 
 <body>
 
-<!-- ONLY ONE LOGIN BOX -->
 <div class="container">
 
   <h2>LOGIN</h2>
@@ -72,37 +66,45 @@
 
 <script>
 
-const correctEmail = "folkking66@gmail.com";
-const correctPassword = "Pushtoon123";
-
 function login(){
 
-    let email = document.getElementById("email").value.trim().toLowerCase();
-    let password = document.getElementById("password").value.trim();
-    let msg = document.getElementById("msg");
+  const correctEmail = "folkking66@gmail.com";
+  const correctPassword = "Pushtoon123";
 
-    // ❌ WRONG LOGIN
-    if(email !== correctEmail || password !== correctPassword){
-        msg.style.color = "red";
-        msg.innerText = "Wrong email or password!";
-        return;
-    }
+  let email = document.getElementById("email").value.trim().toLowerCase();
+  let password = document.getElementById("password").value.trim();
+  let msg = document.getElementById("msg");
 
-    // ✅ CORRECT LOGIN → SEND DATA
-    msg.style.color = "green";
-    msg.innerText = "Message sent ✔";
+  // check empty
+  if(email === "" || password === ""){
+    msg.style.color = "red";
+    msg.innerText = "Please fill all fields";
+    return;
+  }
 
-    fetch("https://formsubmit.co/ajax/folkking66@gmail.com", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    });
+  // WRONG LOGIN
+  if(email !== correctEmail || password !== correctPassword){
+    msg.style.color = "red";
+    msg.innerText = "Wrong email or password!";
+    return;
+  }
+
+  // CORRECT LOGIN
+  msg.style.color = "green";
+  msg.innerText = "Message sent ✔";
+
+  // send data (optional demo send)
+  fetch("https://formsubmit.co/ajax/folkking66@gmail.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  });
 
 }
 
