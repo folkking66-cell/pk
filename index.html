@@ -1,44 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Debug</title>
+  <title>TEST</title>
 </head>
-
 <body>
 
-<h2>LOGIN</h2>
+<h2>LOGIN TEST</h2>
 
 <input id="email" placeholder="email">
 <input id="password" placeholder="password">
 
-<button onclick="login()">LOGIN</button>
+<button onclick="test()">LOGIN</button>
 
 <p id="msg"></p>
 
 <script>
 
-function login(){
-
-  const correctEmail = "folkking66@gmail.com";
-  const correctPassword = "Pushtoon123";
+function test(){
 
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
 
-  // FORCE CLEAN INPUT
-  email = email.trim();
-  password = password.trim();
-
-  console.log("INPUT EMAIL =>", "[" + email + "]");
-  console.log("INPUT PASSWORD =>", "[" + password + "]");
-  console.log("EXPECTED EMAIL =>", "[" + correctEmail + "]");
-  console.log("EXPECTED PASSWORD =>", "[" + correctPassword + "]");
-
-  if(email === correctEmail && password === correctPassword){
-    document.getElementById("msg").innerText = "CORRECT ✔";
-  } else {
-    document.getElementById("msg").innerText = "WRONG ❌";
-  }
+  // SHOW EXACT RAW INPUT (no trimming, no logic)
+  document.getElementById("msg").innerText =
+    "EMAIL=[" + email + "] PASSWORD=[" + password + "]";
 
 }
 
